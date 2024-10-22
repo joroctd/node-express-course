@@ -1,8 +1,4 @@
-const log = (...args) => {
-	args.forEach(arg => {
-		console.log(arg);
-	});
-};
+const log = require('./05-utils.js');
 
 try {
 	// requires Node v20.12.0 or newer
