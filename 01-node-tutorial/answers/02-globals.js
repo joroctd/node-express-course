@@ -1,4 +1,8 @@
-const log = require('./01-intro.js');
+const log = (...args) => {
+	args.forEach(arg => {
+		console.log(arg);
+	});
+};
 
 try {
 	// requires Node v20.12.0 or newer
