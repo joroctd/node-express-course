@@ -2,3 +2,6 @@
 references/content/big.txt
 answers/temporary/*
 !answers/temporary/.keep
+
+# would typically be ignored
+# .env
