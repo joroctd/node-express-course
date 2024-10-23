@@ -4,8 +4,9 @@ const filePath = './temporary/fileB.txt';
 let line = 1;
 const lineLimit = 3;
 
-const writeLines = (flag = 'a') => (
-	(err, res) => {
+const writeLines = (flag = 'w') => {
+	console.log(flag);
+	return (err, res) => {
 		if (err) {
 			console.error(err);
 			return;
@@ -13,9 +14,9 @@ const writeLines = (flag = 'a') => (
 
 		if (line <= lineLimit) {
 			console.log(`Attempting to write line ${line}...`);
-			writeFile(filePath, `Line ${line++}\n`, { flag }, writeLines('w'));
+			writeFile(filePath, `Line ${line++}\n`, { flag }, writeLines('a'));
 		}
-	}
-);
+	};
+};
 
 writeLines()();
