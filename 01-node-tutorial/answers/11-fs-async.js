@@ -1,11 +1,10 @@
 const { writeFile } = require('node:fs');
 
 const filePath = './temporary/fileB.txt';
-let line = 1;
 const lineLimit = 3;
+let line = 1;
 
-const writeLines = (flag = 'w') => {
-	console.log(flag);
+const createWriteCallback = (flag = 'w') => {
 	return (err, res) => {
 		if (err) {
 			console.error(err);
@@ -14,9 +13,16 @@ const writeLines = (flag = 'w') => {
 
 		if (line <= lineLimit) {
 			console.log(`Attempting to write line ${line}...`);
-			writeFile(filePath, `Line ${line++}\n`, { flag }, writeLines('a'));
+			writeFile(
+				filePath,
+				`Line ${line++}\n`,
+				{ flag },
+				createWriteCallback('a')
+			);
+		} else {
+			console.log(`Successfully met line limit of ${lineLimit}.`);
 		}
 	};
 };
 
-writeLines()();
+createWriteCallback()();
