@@ -2,6 +2,7 @@ const http = require('node:http');
 
 const buildHtml = (title, text) => {
 	return `
+	<body>
         <h1>${title}</h1>
         <p>${text}</p>
         <nav>
@@ -9,6 +10,7 @@ const buildHtml = (title, text) => {
             <a href="/about">About</a>
             <a href="/fake">Missing</a>
         </nav>
+	</body>
     `;
 };
 
@@ -18,6 +20,7 @@ const siteMap = {
 };
 
 const server = http.createServer((req, res) => {
+	res.setHeader('Content-Type', 'text/html');
 	if (req.url in siteMap) {
 		res.writeHead(200);
 		res.end(siteMap[req.url]);
