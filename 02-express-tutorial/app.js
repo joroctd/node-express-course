@@ -24,15 +24,22 @@ app.get('/api/v1/test', (req, res) => {
 });
 
 app.get('/api/v1/products', (req, res) => {
-	res.json(products);
-});
-
-app.get('/api/v1/query', (req, res) => {
-	let { search, limit } = req.query;
+	let { search, limit, maxPrice, minPrice } = req.query;
 	let queriedProducts = products;
+
+	// query logic
 	if (search !== undefined) {
-		queriedProducts = queriedProducts.filter(p => p.name.includes(search));
+		queriedProducts = queriedProducts.filter(p => p.name.startsWith(search));
 	}
+	const filterByPrice = (price, createCompareCb) => {
+		if (price !== undefined) {
+			price = parseFloat(price);
+			queriedProducts = queriedProducts.filter(createCompareCb(price));
+		}
+	};
+	filterByPrice(maxPrice, price => prod => prod.price <= price);
+	filterByPrice(minPrice, price => prod => prod.price >= price);
+
 	if (limit !== undefined) {
 		limit = parseInt(limit);
 		queriedProducts = limit < 0 ? [] : queriedProducts.slice(0, limit);
