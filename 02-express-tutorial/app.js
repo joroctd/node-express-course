@@ -1,10 +1,24 @@
 const express = require('express');
+const hpp = require('hpp');
+const helmet = require('helmet');
 const { products, people } = require('./data.js');
 
 const app = express();
 
 app.use(express.static('./public'));
 
+/* Security middleware: */
+// HPP: https://cheatsheetseries.owasp.org/cheatsheets/Nodejs_Security_Cheat_Sheet.html#prevent-http-parameter-pollution
+app.use(hpp());
+// Helmet: https://cheatsheetseries.owasp.org/cheatsheets/Nodejs_Security_Cheat_Sheet.html#use-appropriate-security-headers
+app.use(
+	helmet.frameguard(),
+	helmet.xssFilter(),
+	helmet.noSniff(),
+	helmet.hidePoweredBy()
+);
+
+/* Routes: */
 app.get('/api/v1/test', (req, res) => {
 	res.json({ message: 'It worked!' });
 });
@@ -13,12 +27,25 @@ app.get('/api/v1/products', (req, res) => {
 	res.json(products);
 });
 
+app.get('/api/v1/query', (req, res) => {
+	let { search, limit } = req.query;
+	let queriedProducts = products;
+	if (search !== undefined) {
+		queriedProducts = queriedProducts.filter(p => p.name.includes(search));
+	}
+	if (limit !== undefined) {
+		limit = parseInt(limit);
+		queriedProducts = limit < 0 ? [] : queriedProducts.slice(0, limit);
+	}
+	res.json(queriedProducts);
+});
+
 const prodIdStr = 'productID';
 app.get(`/api/v1/products/:${prodIdStr}`, (req, res) => {
 	const productId = parseInt(req.params[prodIdStr]);
 	const product = products.find(p => p.id === productId);
 	if (product === undefined) {
-		res.status(404).send({ message: 'That product was not found.', productId });
+		res.status(404).json({ message: 'That product was not found.', productId });
 	} else res.json(product);
 });
 
