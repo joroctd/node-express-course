@@ -27,10 +27,10 @@ app.get('/api/v1/products', (req, res) => {
 	let { search, limit, maxPrice, minPrice } = req.query;
 	let queriedProducts = products;
 
-	// query logic
 	if (search !== undefined) {
 		queriedProducts = queriedProducts.filter(p => p.name.startsWith(search));
 	}
+
 	const filterByPrice = (price, createCompareCb) => {
 		if (price !== undefined) {
 			price = parseFloat(price);
