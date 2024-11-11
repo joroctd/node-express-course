@@ -1,28 +1,17 @@
 const express = require('express');
-const hpp = require('hpp');
-const helmet = require('helmet');
+const { securityRouter, parsingRouter, logger } = require('./middleware');
 const { productsRouter, peopleRouter } = require('./routes');
 
 const app = express();
 
 app.use(express.static('./public'));
-
-/* Security middleware: */
-// HPP: https://cheatsheetseries.owasp.org/cheatsheets/Nodejs_Security_Cheat_Sheet.html#prevent-http-parameter-pollution
-app.use(hpp());
-// Helmet: https://cheatsheetseries.owasp.org/cheatsheets/Nodejs_Security_Cheat_Sheet.html#use-appropriate-security-headers
-app.use(
-	helmet.frameguard(),
-	helmet.xssFilter(),
-	helmet.noSniff(),
-	helmet.hidePoweredBy()
-);
-
-/* Routes: */
+app.use(securityRouter);
+app.use(logger);
 const apiRouter = express.Router();
+app.use('/api/v1', apiRouter);
+apiRouter.use(parsingRouter);
 
-apiRouter.use(express.urlencoded({ extended: false }), express.json());
-
+/* Routes */
 apiRouter.get('/test', (req, res) => {
 	res.json({ message: 'It worked!' });
 });
@@ -30,8 +19,6 @@ apiRouter.get('/test', (req, res) => {
 // add people and product routers
 apiRouter.use('/products', productsRouter);
 apiRouter.use('/people', peopleRouter);
-
-app.use('/api/v1', apiRouter);
 
 app.all('*', (req, res) => {
 	const fullPath = req.baseUrl + req.path;
