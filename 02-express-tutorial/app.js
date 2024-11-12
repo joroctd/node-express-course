@@ -1,22 +1,22 @@
 const express = require('express');
-const { securityRouter, parsingRouter, logger } = require('./middleware');
-const { productsRouter, peopleRouter } = require('./routes');
+const { securityRouter, parsingRouter, logger, auth } = require('./middleware');
+const {
+	productsRouter,
+	peopleRouter,
+	testRouter,
+	authRouter
+} = require('./routes');
 
 const app = express();
 
 app.use(express.static('./public'));
-app.use(securityRouter);
-app.use(logger);
+app.use(securityRouter, parsingRouter, logger);
+
+app.use('/', authRouter);
+app.use('/test', auth, testRouter);
+
 const apiRouter = express.Router();
 app.use('/api/v1', apiRouter);
-apiRouter.use(parsingRouter);
-
-/* Routes */
-apiRouter.get('/test', (req, res) => {
-	res.json({ message: 'It worked!' });
-});
-
-// add people and product routers
 apiRouter.use('/products', productsRouter);
 apiRouter.use('/people', peopleRouter);
 
