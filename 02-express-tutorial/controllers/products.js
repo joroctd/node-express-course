@@ -9,10 +9,10 @@ const getProducts = (req, res) => {
 		queriedProducts = queriedProducts.filter(p => p.name.startsWith(search));
 	}
 
-	const filterByPrice = (price, createCompareCb) => {
+	const filterByPrice = (price, createCompareCallback) => {
 		if (price !== undefined) {
 			price = parseFloat(price);
-			queriedProducts = queriedProducts.filter(createCompareCb(price));
+			queriedProducts = queriedProducts.filter(createCompareCallback(price));
 		}
 	};
 
@@ -32,7 +32,10 @@ const getProduct = (req, res) => {
 
 	if (!product) {
 		res.status(404).json({ message: 'That product was not found.', id });
-	} else res.json(product);
+		return;
+	}
+
+	res.json(product);
 };
 
 export { getProducts, getProduct };

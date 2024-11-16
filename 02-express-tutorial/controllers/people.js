@@ -8,10 +8,11 @@ const addPerson = (req, res) => {
 
 	if (!name) {
 		res.status(400).json({ success: false, message: 'Please provide a name' });
-	} else {
-		people.push({ id: ++lastId, name });
-		res.status(201).json({ success: true, name });
+		return;
 	}
+
+	people.push({ id: ++lastId, name });
+	res.status(201).json({ success: true, name });
 };
 
 const getPeople = (req, res) => {
@@ -24,7 +25,10 @@ const getPerson = (req, res) => {
 
 	if (!person) {
 		res.status(404).json({ message: 'That person was not found.', id });
-	} else res.json(person);
+		return;
+	}
+
+	res.json(person);
 };
 
 const deletePerson = (req, res) => {
@@ -36,10 +40,11 @@ const deletePerson = (req, res) => {
 			success: false,
 			message: `${PERSON_ID_STR} of ${id} not found.`
 		});
-	} else {
-		people = people.filter(p => p.id !== id);
-		res.status(200).json({ success: true, id });
+		return;
 	}
+
+	people = people.filter(p => p.id !== id);
+	res.status(200).json({ success: true, id });
 };
 
 const updatePerson = (req, res) => {
@@ -52,12 +57,16 @@ const updatePerson = (req, res) => {
 			success: false,
 			message: `${PERSON_ID_STR} of ${id} not found.`
 		});
-	} else if (!name) {
-		res.status(400).json({ success: false, message: 'Please provide a name' });
-	} else {
-		people[personIndex] = Object.assign(people[personIndex], { name });
-		res.status(200).json({ success: true, data: people[personIndex] });
+		return;
 	}
+
+	if (!name) {
+		res.status(400).json({ success: false, message: 'Please provide a name' });
+		return;
+	}
+
+	people[personIndex] = Object.assign(people[personIndex], { name });
+	res.status(200).json({ success: true, data: people[personIndex] });
 };
 
 export { addPerson, getPeople, getPerson, deletePerson, updatePerson };
