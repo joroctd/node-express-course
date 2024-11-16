@@ -1,4 +1,4 @@
-module.exports = (req, res) => {
+export default (req, res) => {
 	const { name } = req.body;
 	if (!name) {
 		res.status(400).json({ message: 'No cookie due to: No name provided' });

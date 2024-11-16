@@ -1,7 +1,4 @@
-const auth = require('./auth');
-const logger = require('./logger');
+import auth from './auth.js';
+import logger from './logger.js';
 
-module.exports = {
-	auth,
-	logger
-};
+export { auth, logger };

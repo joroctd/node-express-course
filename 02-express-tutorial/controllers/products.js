@@ -1,5 +1,5 @@
-const { products } = require('../data');
-const { PRODUCT_ID_STR } = require('../constants');
+import { products, constants } from '../data.js';
+const { PRODUCT_ID_STR } = constants;
 
 const getProducts = (req, res) => {
 	let { search, limit, maxPrice, minPrice } = req.query;
@@ -35,7 +35,4 @@ const getProduct = (req, res) => {
 	} else res.json(product);
 };
 
-module.exports = {
-	getProducts,
-	getProduct
-};
+export { getProducts, getProduct };

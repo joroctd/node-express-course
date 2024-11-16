@@ -1,6 +1,6 @@
-const express = require('express');
-const hpp = require('hpp');
-const helmet = require('helmet');
+import express from 'express';
+import hpp from 'hpp';
+import helmet from 'helmet';
 
 const router = express.Router();
 // HPP: https://cheatsheetseries.owasp.org/cheatsheets/Nodejs_Security_Cheat_Sheet.html#prevent-http-parameter-pollution
@@ -13,4 +13,4 @@ router.use(
 	helmet.hidePoweredBy()
 );
 
-module.exports = router;
+export default router;

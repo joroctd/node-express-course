@@ -1,4 +1,4 @@
-module.exports = (req, res) => {
+export default (req, res) => {
 	const { name } = req.cookies;
 	if (name) {
 		res.clearCookie('name');

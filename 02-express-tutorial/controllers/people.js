@@ -1,5 +1,5 @@
-let { people } = require('../data');
-const { PERSON_ID_STR } = require('../constants');
+import { people, constants } from '../data.js';
+const { PERSON_ID_STR } = constants;
 
 let lastId = people[people.length - 1].id;
 
@@ -60,10 +60,4 @@ const updatePerson = (req, res) => {
 	}
 };
 
-module.exports = {
-	addPerson,
-	getPeople,
-	getPerson,
-	deletePerson,
-	updatePerson
-};
+export { addPerson, getPeople, getPerson, deletePerson, updatePerson };

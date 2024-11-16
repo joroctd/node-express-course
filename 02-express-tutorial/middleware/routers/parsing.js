@@ -1,5 +1,5 @@
-const express = require('express');
-const cookieParser = require('cookie-parser');
+import express from 'express';
+import cookieParser from 'cookie-parser';
 
 const router = express.Router();
 
@@ -9,4 +9,4 @@ router.use(
 	cookieParser()
 );
 
-module.exports = router;
+export default router;

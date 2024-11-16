@@ -1,10 +1,5 @@
-const securityRouter = require('./routers/security');
-const parsingRouter = require('./routers/parsing');
-const { logger, auth } = require('./custom');
+import securityRouter from './routers/security.js';
+import parsingRouter from './routers/parsing.js';
+import { logger, auth } from './custom/index.js';
 
-module.exports = {
-	securityRouter,
-	parsingRouter,
-	logger,
-	auth
-};
+export { securityRouter, parsingRouter, logger, auth };

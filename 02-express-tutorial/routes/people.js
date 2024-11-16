@@ -1,13 +1,14 @@
-const express = require('express');
+import express from 'express';
 const router = express.Router();
-const {
+import {
 	addPerson,
 	getPeople,
 	getPerson,
 	deletePerson,
 	updatePerson
-} = require('../controllers/people');
-const { PERSON_ID_STR } = require('../constants');
+} from '../controllers/people.js';
+import { constants } from '../data.js';
+const { PERSON_ID_STR } = constants;
 
 router.route('/').get(getPeople).post(addPerson);
 router
@@ -16,4 +17,4 @@ router
 	.delete(deletePerson)
 	.put(updatePerson);
 
-module.exports = router;
+export default router;

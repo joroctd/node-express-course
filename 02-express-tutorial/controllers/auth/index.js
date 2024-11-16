@@ -1,7 +1,4 @@
-const logoff = require('./logoff');
-const logon = require('./logon');
+import logoff from './logoff.js';
+import logon from './logon.js';
 
-module.exports = {
-	logoff,
-	logon
-};
+export { logoff, logon };

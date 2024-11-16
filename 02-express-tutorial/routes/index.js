@@ -1,11 +1,6 @@
-const productsRouter = require('./products');
-const peopleRouter = require('./people');
-const testRouter = require('./test');
-const authRouter = require('./auth');
+import productsRouter from './products.js';
+import peopleRouter from './people.js';
+import testRouter from './test.js';
+import authRouter from './auth.js';
 
-module.exports = {
-	productsRouter,
-	peopleRouter,
-	testRouter,
-	authRouter
-};
+export { productsRouter, peopleRouter, testRouter, authRouter };

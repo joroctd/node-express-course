@@ -1,8 +1,8 @@
-const express = require('express');
+import express from 'express';
 const router = express.Router();
-const { logon, logoff } = require('../controllers/auth');
+import { logon, logoff } from '../controllers/auth/index.js';
 
 router.post('/logon', logon);
 router.delete('/logoff', logoff);
 
-module.exports = router;
+export default router;

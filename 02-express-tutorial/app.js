@@ -1,11 +1,16 @@
-const express = require('express');
-const { securityRouter, parsingRouter, logger, auth } = require('./middleware');
-const {
+import express from 'express';
+import {
+	securityRouter,
+	parsingRouter,
+	logger,
+	auth
+} from './middleware/index.js';
+import {
 	productsRouter,
 	peopleRouter,
 	testRouter,
 	authRouter
-} = require('./routes');
+} from './routes/index.js';
 
 const app = express();
 
