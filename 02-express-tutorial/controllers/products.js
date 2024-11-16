@@ -12,7 +12,7 @@ const getProducts = (req, res) => {
 	const filterByPrice = (price, createCompareCallback) => {
 		if (price !== undefined) {
 			price = parseFloat(price);
-			if (price === NaN) {
+			if (isNaN(price)) {
 				res.status(400).json('Bad request: provided number was not parseable.');
 				return;
 			}
@@ -25,7 +25,7 @@ const getProducts = (req, res) => {
 
 	if (limit !== undefined) {
 		limit = parseInt(limit);
-		if (limit === NaN) {
+		if (isNaN(limit)) {
 			res.status(400).json('Bad request: provided number was not parseable.');
 			return;
 		}
