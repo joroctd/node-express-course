@@ -10,7 +10,7 @@ const createTask = async (req, res) => {
 	res.status(201).json({ task });
 };
 
-const handleTaskandResponse = (task, res) => {
+const handleTaskandResponse = (task, taskID, res) => {
 	if (!task) {
 		res.status(404).json({ message: `No task with id : ${taskID}` });
 		return;
@@ -23,7 +23,7 @@ const getTask = async (req, res) => {
 	const { id: taskID } = req.params;
 	const task = await Task.findOne({ _id: taskID });
 
-	handleTaskandResponse(task, res);
+	handleTaskandResponse(task, taskID, res);
 };
 
 const updateTask = async (req, res) => {
@@ -34,14 +34,14 @@ const updateTask = async (req, res) => {
 		// runValidators: true
 	});
 
-	handleTaskandResponse(task, res);
+	handleTaskandResponse(task, taskID, res);
 };
 
 const deleteTask = async (req, res) => {
 	const { id: taskID } = req.params;
 	const task = await Task.findOneAndDelete({ _id: taskID });
 
-	handleTaskandResponse(task, res);
+	handleTaskandResponse(task, taskID, res);
 };
 
 export { getTasks, getTask, createTask, updateTask, deleteTask };
