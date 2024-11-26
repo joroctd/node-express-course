@@ -3,9 +3,7 @@ const app = express();
 
 const requireAll = require('./utils/requireAll');
 const { errorHandler, notFound } = requireAll('./middleware');
-const {
-	db: { connect }
-} = requireAll('./utils');
+const connectDatabase = require('./utils/db/connect');
 
 app.use(express.json());
 
@@ -21,7 +19,7 @@ process.loadEnvFile('./.env');
 const port = process.env.PORT || 3000;
 const main = async () => {
 	try {
-		await connect(process.env.MONGO_URI);
+		await connectDatabase(process.env.MONGO_URI);
 		app.listen(port, err => {
 			if (err) {
 				console.error(`Could not start server on port ${port}.`);
