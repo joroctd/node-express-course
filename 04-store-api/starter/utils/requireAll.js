@@ -1,7 +1,13 @@
 const fs = require('node:fs');
 const path = require('node:path');
 
-const acceptedFileType = '.js';
+const acceptedFileTypes = ['.js', '.json'].reduce(
+	(typeObject, fileType) => ({
+		...typeObject,
+		[fileType]: fileType
+	}),
+	{}
+);
 const requireAll = (directory, pathToDirectory = '../') => {
 	const required = {};
 	fs.readdirSync(directory).forEach(file => {
@@ -11,9 +17,10 @@ const requireAll = (directory, pathToDirectory = '../') => {
 			return;
 		}
 
-		if (path.extname(file) !== acceptedFileType) return;
+		const fileType = acceptedFileTypes[path.extname(file)];
+		if (!fileType) return;
 
-		required[path.basename(file, acceptedFileType)] = require(path.join(
+		required[path.basename(file, fileType)] = require(path.join(
 			pathToDirectory,
 			directory,
 			file
