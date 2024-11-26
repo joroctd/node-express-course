@@ -1,8 +1,8 @@
 const express = require('express');
 const app = express();
-
 const requireAll = require('./utils/requireAll');
 const { errorHandler, notFound } = requireAll('./middleware');
+const routers = requireAll('./routes');
 const connectDatabase = require('./utils/db/connect');
 
 app.use(express.json());
@@ -11,7 +11,9 @@ app.get('/', (req, res) => {
 	res.send('<h1>Store API</h1><a href="/api/v1/products">Go to products</a>');
 });
 
-app.get('/api/v1/products', (req, res) => {});
+Object.keys(routers).forEach(route => {
+	app.use(`/api/v1/${route}`, routers[route]);
+});
 
 app.use(notFound, errorHandler);
 
