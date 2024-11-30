@@ -35,7 +35,7 @@ const getProducts = (req, res) => {
 };
 
 const getProduct = (req, res) => {
-	const id = parseInt(req.query[PRODUCT_ID_STR]);
+	const id = parseInt(req.params[PRODUCT_ID_STR]);
 	const product = products.find(p => p.id === id);
 
 	if (!product) {
