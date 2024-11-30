@@ -20,7 +20,7 @@ const getPeople = (req, res) => {
 };
 
 const getPerson = (req, res) => {
-	const id = parseInt(req.query[PERSON_ID_STR]);
+	const id = parseInt(req.params[PERSON_ID_STR]);
 	const person = people.find(p => p.id === id);
 
 	if (!person) {
