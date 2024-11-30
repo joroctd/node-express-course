@@ -22,7 +22,7 @@ module.exports = {
 				'<': '$lt',
 				'<=': '$lte'
 			};
-			const buildRegExString = array => `\\b${array.join('|')}\\b`;
+			const buildRegExString = searches => `\\b${searches.join('|')}\\b`;
 			const regEx = new RegExp(buildRegExString(Object.keys(operatorMap)), 'g');
 			const filters = numericFilters.replace(
 				regEx,
