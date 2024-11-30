@@ -24,13 +24,14 @@ module.exports = {
 			};
 			const buildRegExString = searches => `\\b${searches.join('|')}\\b`;
 			const regEx = new RegExp(buildRegExString(Object.keys(operatorMap)), 'g');
+			const separator = '-';
 			const filters = numericFilters.replace(
 				regEx,
-				operator => `-${operatorMap[operator]}-`
+				operator => `${separator}${operatorMap[operator]}${separator}`
 			);
 			const options = ['price', 'rating'];
 			filters.split(',').forEach(filter => {
-				const [field, operator, value] = filter.split('-');
+				const [field, operator, value] = filter.split(separator);
 				if (!options.includes(field)) return;
 
 				const num = Number(value);
