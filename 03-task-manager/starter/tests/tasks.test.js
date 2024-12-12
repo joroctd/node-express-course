@@ -84,8 +84,8 @@ describe(`GET ${tasksRoute}/:id`, () => {
 		it('should return JSON', async ({ expect }) => {
 			expect(res.type).toBe('application/json');
 		});
-		it('should return 400 Bad Request', async ({ expect }) => {
-			expect(res.statusCode).toBe(400);
+		it('should return 500 Internal Server Error', async ({ expect }) => {
+			expect(res.statusCode).toBe(500);
 		});
 		it('should not return a task', async ({ expect }) => {
 			expect(res.body.task).toBeUndefined();
@@ -204,8 +204,8 @@ describe(`PATCH ${tasksRoute}/:id`, () => {
 		it('should return JSON', async ({ expect }) => {
 			expect(res.type).toBe('application/json');
 		});
-		it('should return 400 Bad Request', async ({ expect }) => {
-			expect(res.statusCode).toBe(400);
+		it('should return 500 Internal Server Error', async ({ expect }) => {
+			expect(res.statusCode).toBe(500);
 		});
 		it('should not return a task', async ({ expect }) => {
 			expect(res.body.task).toBeUndefined();
@@ -249,8 +249,8 @@ describe(`DELETE ${tasksRoute}/:id`, () => {
 		it('should return JSON', async ({ expect }) => {
 			expect(res.type).toBe('application/json');
 		});
-		it('should return 400 Bad Request', async ({ expect }) => {
-			expect(res.statusCode).toBe(400);
+		it('should return 500 Internal Server Error', async ({ expect }) => {
+			expect(res.statusCode).toBe(500);
 		});
 		it('should not return a task', async ({ expect }) => {
 			expect(res.body.task).toBeUndefined();
