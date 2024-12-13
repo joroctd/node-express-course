@@ -1,5 +1,10 @@
 module.exports = {
 	getHello: (req, res) => {
-		res.json({ message: "Hello, you're successfully authenticated!" });
+		const {
+			user: { username }
+		} = req;
+		res.json({
+			message: `Hello ${username}, you're successfully authenticated!`
+		});
 	}
 };
