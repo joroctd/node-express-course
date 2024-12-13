@@ -12,7 +12,6 @@ module.exports = {
 		// https://nodejs.org/api/crypto.html#cryptorandomuuidoptions
 		const id = crypto.randomUUID({ disableEntropyCache: true });
 
-		// TODO: use jwt.sign to create a JWT
 		const token = jwt.sign({ id, name }, process.env.JWT_SECRET, {
 			expiresIn: process.env.JWT_EXPIRY
 		});

@@ -15,9 +15,10 @@ const {
 const apiRouter = express.Router();
 app.use('/api/v1', security, apiRouter);
 
-const { hello, logon } = requireAll('./routes');
+const { hello, dashboard, logon } = requireAll('./routes');
 apiRouter.use('/logon', logon);
 apiRouter.use('/hello', auth, hello);
+apiRouter.use('/dashboard', auth, dashboard);
 
 apiRouter.use(errorHandler);
 app.use(notFound);

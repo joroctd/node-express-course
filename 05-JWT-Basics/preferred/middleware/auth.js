@@ -3,7 +3,6 @@ const ApiError = require('../errors/ApiError');
 
 module.exports = (req, res, next) => {
 	const { authorization } = req.headers;
-	console.log(req.headers);
 	if (!authorization?.startsWith('Bearer ')) {
 		throw new ApiError('Invalid (or no) authentication provided.', 401);
 	}
