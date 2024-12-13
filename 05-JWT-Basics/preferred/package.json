@@ -1,0 +1,20 @@
+{
+	"name": "jwt",
+	"version": "1.0.0",
+	"description": "jwt basics",
+	"main": "app.js",
+	"scripts": {
+		"start": "nodemon app.js"
+	},
+	"author": "",
+	"license": "ISC",
+	"devDependencies": {
+		"nodemon": "^3.1.7"
+	},
+	"dependencies": {
+		"express": "^4.21.1",
+		"helmet": "^8.0.0",
+		"hpp": "^0.2.3",
+		"jsonwebtoken": "^9.0.2"
+	}
+}
