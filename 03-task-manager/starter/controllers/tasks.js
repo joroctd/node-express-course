@@ -51,14 +51,13 @@ const updateTask = async (req, res) => {
 
 	try {
 		const task = await Task.findByIdAndUpdate(taskID, newTask, {
-			new: true
-			// TODO: enable and add validation in schema/model
-			// runValidators: true
+			new: true,
+			// required to run validators on PUT / PATCH
+			runValidators: true
 		});
 		handleTaskandResponse(task, taskID, res);
 	} catch {
 		res.status(400).json({ message: 'Malformed ID.' });
-		return;
 	}
 };
 
