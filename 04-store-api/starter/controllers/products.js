@@ -14,7 +14,7 @@ module.exports = {
 		// http://localhost:5000/api/v1/products?company=liddy
 		if (company) queryObject.company = company;
 		// http://localhost:5000/api/v1/products?name=al
-		if (name) queryObject.name = { $regex: name, options: 'i' };
+		if (name) queryObject.name = { $regex: name, $options: 'i' };
 
 		// http://localhost:5000/api/v1/products?numericFilters=price%3E=20,rating%3C5
 		const operatorMap = {
